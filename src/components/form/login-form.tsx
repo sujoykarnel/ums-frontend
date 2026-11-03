@@ -9,6 +9,8 @@ import { loginZodShema } from "@/validations";
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
+import { Spinner } from "../ui/spinner";
+import { toast } from "../ui/toast";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,11 +34,21 @@ export default function LoginForm() {
 
       login(loginData, {
         onSuccess: (res) => {
-          console.log(res);
+          toast.add({
+            title: "Login Success",
+            description: "Welcome Back!",
+            type: "success",
+          });
+
           router.push("/");
         },
         onError: (err) => {
-          console.log(err);
+          toast.add({
+            title: "Authorization Failure",
+            description:
+              err.message || "Something went wrong. Please try again",
+            type: "error",
+          });
         },
       });
     },
@@ -116,7 +128,15 @@ export default function LoginForm() {
             }}
           </form.Field>
 
-          <Button type="submit">Submit</Button>
+          <Button disabled={loginPending} type="submit">
+            {loginPending ? (
+              <>
+                <Spinner /> Submitting
+              </>
+            ) : (
+              "Submit"
+            )}
+          </Button>
         </FieldGroup>
       </form>
     </div>
