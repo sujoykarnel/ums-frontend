@@ -29,6 +29,7 @@ export default function LoginPage() {
           sizes="50vw"
         />
       </div>
+      
     </div>
   );
 }

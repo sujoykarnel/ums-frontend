@@ -1,12 +1,13 @@
 "use client";
 
-import { GoogleLogin } from "@react-oauth/google";
 import { useForm } from "@tanstack/react-form";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useGoogleOAuth, useLogin } from "@/hooks";
+import { useLogin } from "@/hooks";
 import { loginZodShema } from "@/validations";
+import GoogleLoginComponent from "../modules/google-login/GoogleLogin";
 import { Button } from "../ui/button";
 import {
   Field,
@@ -24,7 +25,6 @@ export default function LoginForm() {
   const router = useRouter();
 
   const { mutate: login, isPending: loginPending } = useLogin();
-  const { mutate: googleLogin } = useGoogleOAuth();
 
   const form = useForm({
     defaultValues: {
@@ -62,48 +62,6 @@ export default function LoginForm() {
     },
   });
 
-  const handleGoogleSuccess = (credentialResponse: { credential?: string }) => {
-    const idToken = credentialResponse.credential;
-    if (!idToken) {
-      toast.add({
-        title: "Google OAuth Failed",
-        description: "Something went wrong. Please try again",
-        type: "error",
-      });
-      return;
-    }
-    googleLogin(
-      { idToken },
-      {
-        onSuccess: () => {
-          toast.add({
-            title: "Login Successful",
-            description: "Welcome Back!",
-            type: "success",
-          });
-
-          router.push("/");
-        },
-        onError: (err) => {
-          toast.add({
-            title: "Google OAuth Failed",
-            description:
-              err.message || "Something went wrong. Please try again",
-            type: "error",
-          });
-        },
-      },
-    );
-  };
-
-  const handleGoogleError = () => {
-    toast.add({
-      title: "Google OAuth Failed",
-      description: "Something went wrong. Please try again",
-      type: "error",
-    });
-  };
-
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col items-center gap-2 text-center">
@@ -131,6 +89,7 @@ export default function LoginForm() {
                   <Input
                     id={field.name}
                     name={field.name}
+                    type="email"
                     onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
                     value={field.state.value}
@@ -191,13 +150,16 @@ export default function LoginForm() {
         </FieldGroup>
       </form>
       <FieldSeparator>Or</FieldSeparator>
-      <GoogleLogin
-        theme="outline"
-        shape="square"
-        text="continue_with"
-        onSuccess={handleGoogleSuccess}
-        onError={handleGoogleError}
-      />
+      <GoogleLoginComponent />
+      <div className="text-center text-sm text-muted-foreground">
+        Don't have an account?{" "}
+        <Link
+          href={"/register"}
+          className="font-medium underline underline-offset-4 hover:text-primary"
+        >
+          Register
+        </Link>
+      </div>
     </div>
   );
 }
