@@ -3,9 +3,8 @@
 import { useForm } from "@tanstack/react-form";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useLogin } from "@/hooks";
+import type z from "zod";
 import { registerZodShema } from "@/validations";
 import GoogleLoginComponent from "../modules/google-login/GoogleLogin";
 import { Button } from "../ui/button";
@@ -18,50 +17,28 @@ import {
 } from "../ui/field";
 import { Input } from "../ui/input";
 import { Spinner } from "../ui/spinner";
-import { toast } from "../ui/toast";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
+  const [showConfirmPassword, setConfirmShowPassword] = useState(false);
+  const loginPending = false
 
-  const { mutate: login, isPending: loginPending } = useLogin();
+  type registerDefaultValues = z.infer<typeof registerZodShema>;
+  const defaultValues: registerDefaultValues = {
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  };
 
   const form = useForm({
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
+    defaultValues,
     validators: {
       onSubmit: registerZodShema,
     },
     onSubmit: ({ value }) => {
-      const loginData = {
-        name: value.name,
-        email: value.email,
-        password: value.password,
-      };
-
-      login(loginData, {
-        onSuccess: () => {
-          toast.add({
-            title: "Login Successful",
-            description: "Welcome Back!",
-            type: "success",
-          });
-
-          router.push("/");
-        },
-        onError: (err) => {
-          toast.add({
-            title: "Authorization Failure",
-            description:
-              err.message || "Something went wrong. Please try again",
-            type: "error",
-          });
-        },
-      });
+      console.log(value);
     },
   });
 
@@ -128,6 +105,29 @@ export default function RegisterForm() {
             }}
           </form.Field>
 
+          <form.Field name="phone">
+            {(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name}>Phone</FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    type="tel"
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    onBlur={field.handleBlur}
+                    value={field.state.value}
+                    autoComplete="off"
+                    aria-invalid={isInvalid}
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              );
+            }}
+          </form.Field>
+
           <form.Field name="password">
             {(field) => {
               const isInvalid =
@@ -175,7 +175,7 @@ export default function RegisterForm() {
                     <Input
                       id={field.name}
                       name={field.name}
-                      type={showPassword ? "text" : "password"}
+                      type={showConfirmPassword ? "text" : "password"}
                       onChange={(e) => field.handleChange(e.target.value)}
                       onBlur={field.handleBlur}
                       value={field.state.value}
@@ -185,9 +185,9 @@ export default function RegisterForm() {
                     <button
                       className="absolute right-2 top-1/2 -translate-y-1/2"
                       type="button"
-                      onClick={() => setShowPassword((prev) => !prev)}
+                      onClick={() => setConfirmShowPassword((prev) => !prev)}
                     >
-                      {showPassword ? (
+                      {showConfirmPassword ? (
                         <EyeOff className="size-5" />
                       ) : (
                         <Eye className="size-5" />
