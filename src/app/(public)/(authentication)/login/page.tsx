@@ -21,7 +21,7 @@ export default function LoginPage() {
       </div>
       <div className="relative hidden bg-muted lg:block">
         <Image
-          src="/login.jpg"
+          src="/loginImage.jpg"
           alt="Login background"
           fill
           priority
@@ -29,7 +29,7 @@ export default function LoginPage() {
           sizes="50vw"
         />
       </div>
-      
+
     </div>
   );
 }

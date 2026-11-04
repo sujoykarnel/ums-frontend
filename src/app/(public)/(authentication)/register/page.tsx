@@ -21,7 +21,7 @@ export default function RegisterPage() {
       </div>
       <div className="relative hidden bg-muted lg:block">
         <Image
-          src="/register.jpg"
+          src="/registerImage.jpg"
           alt="Register background"
           fill
           priority
