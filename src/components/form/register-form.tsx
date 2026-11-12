@@ -3,8 +3,10 @@
 import { useForm } from "@tanstack/react-form";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type z from "zod";
+import { useRegistration } from "@/hooks";
 import { registerZodShema } from "@/validations";
 import GoogleLoginComponent from "../modules/google-login/GoogleLogin";
 import { Button } from "../ui/button";
@@ -17,13 +19,15 @@ import {
 } from "../ui/field";
 import { Input } from "../ui/input";
 import { Spinner } from "../ui/spinner";
+import { toast } from "../ui/toast";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setConfirmShowPassword] = useState(false);
-  const loginPending = false
+  const router = useRouter();
 
   type registerDefaultValues = z.infer<typeof registerZodShema>;
+
   const defaultValues: registerDefaultValues = {
     name: "",
     email: "",
@@ -32,13 +36,49 @@ export default function RegisterForm() {
     confirmPassword: "",
   };
 
+  const { mutate: registration, isPending: registrationPending } =
+    useRegistration();
+
   const form = useForm({
     defaultValues,
     validators: {
       onSubmit: registerZodShema,
     },
     onSubmit: ({ value }) => {
-      console.log(value);
+      const registrationData = {
+        name: value.name,
+        email: value.email,
+        phone: value.phone,
+        password: value.password,
+      };
+      registration(registrationData, {
+        onSuccess: (res) => {
+          if (!res.success) {
+            toast.add({
+              title: "Server Failure",
+              description: "Something went wrong. Please try again",
+              type: "error",
+            });
+          }
+          toast.add({
+            title: "Rgistration Successful",
+            description: "OTP sent to your Email. Please verify your account",
+            type: "success",
+          });
+
+          const params = new URLSearchParams({ email: registrationData.email });
+
+          router.push(`/register/verify-account?${params.toString()}`);
+        },
+        onError: (err) => {
+          toast.add({
+            title: "Authorization Failure",
+            description:
+              err.message || "Something went wrong. Please try again",
+            type: "error",
+          });
+        },
+      });
     },
   });
 
@@ -200,8 +240,8 @@ export default function RegisterForm() {
             }}
           </form.Field>
 
-          <Button disabled={loginPending} type="submit">
-            {loginPending ? (
+          <Button disabled={registrationPending} type="submit">
+            {registrationPending ? (
               <>
                 <Spinner /> Submitting
               </>
