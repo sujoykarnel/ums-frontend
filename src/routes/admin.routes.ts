@@ -38,19 +38,4 @@ export const adminRouters = [
       },
     ],
   },
-  {
-    title: "Settings",
-    url: "#",
-    items: [
-      {
-        title: "Routing",
-        url: "#",
-      },
-      {
-        title: "Data Fetching",
-        url: "#",
-        isActive: true,
-      },
-    ],
-  },
 ];
