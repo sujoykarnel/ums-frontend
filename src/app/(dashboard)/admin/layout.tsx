@@ -9,7 +9,7 @@ export default function AdminDashboardLayout({
 }) {
   return (
     <RoleGuard roles={["ADMIN", "SUPER_ADMIN"]}>
-      <DashboardShell >{children}</DashboardShell>
+      <DashboardShell userRole="ADMIN">{children}</DashboardShell>
     </RoleGuard>
   );
 }
