@@ -10,3 +10,13 @@ export interface IUnivisity {
   createdAt: string;
   updatedAt: string;
 }
+export interface IDepartment {
+  id: string;
+  name: string;
+  code: string;
+  universityId: string;
+  isDelete: boolean;
+  deletedAt: null | string;
+  createdAt: string;
+  updatedAt: string;
+}

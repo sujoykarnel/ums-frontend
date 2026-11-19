@@ -14,8 +14,8 @@ export default function UniversityTabs() {
           <Input type="search" placeholder="Search" />
         </div>
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="add-new">Add University</TabsTrigger>
+          <TabsTrigger value="overview">All</TabsTrigger>
+          <TabsTrigger value="add-new">Add New</TabsTrigger>
         </TabsList>
       </div>
 

@@ -8,8 +8,8 @@ export default function TableLoading() {
     <div className=" border rounded-lg">
       <Table>
         <TableBody>
-          {[1, 2, 3].map((_) => (
-            <TableRow key={_}>
+          {[1, 2, 3].map((item) => (
+            <TableRow key={item}>
               <TableCell colSpan={6} className="font-medium">
                 <Skeleton className="h-9 w-100" />
               </TableCell>
