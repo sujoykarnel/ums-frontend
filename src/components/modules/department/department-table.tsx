@@ -19,18 +19,18 @@ export default function DepartmentTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="">SL</TableHead>
-            <TableHead className="">Name</TableHead>
-            <TableHead className="">Code</TableHead>
-            <TableHead className="text-center">Action</TableHead>
+            <TableHead className="font-bold">SL</TableHead>
+            <TableHead className="font-bold">Name</TableHead>
+            <TableHead className="font-bold">Code</TableHead>
+            <TableHead className="font-bold text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {departments.map((department) => (
-            <TableRow key={department.id}>
-              <TableCell className="font-medium">1</TableCell>
-              <TableCell className="font-medium">{department.name}</TableCell>
-              <TableCell className="font-medium">{department.code}</TableCell>
+          {departments.map((row, idx) => (
+            <TableRow key={row.id}>
+              <TableCell className="font-medium">{idx + 1}</TableCell>
+              <TableCell className="font-medium">{row.name}</TableCell>
+              <TableCell className="font-medium">{row.code}</TableCell>
               <TableCell className="text-center">
                 <Button variant="outline">Update</Button>
               </TableCell>

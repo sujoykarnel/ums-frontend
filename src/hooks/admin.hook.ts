@@ -1,5 +1,10 @@
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-import { getAllDepartments, getAllUniversities } from "@/api";
+import {
+  getAllDepartments,
+  getAllInstructors,
+  getAllPrograms,
+  getAllUniversities,
+} from "@/api";
 
 export function useGetAllUniversities() {
   return useQuery({
@@ -20,9 +25,38 @@ export function useGetAllDepartments() {
     queryFn: getAllDepartments,
   });
 }
+
 export function useSuspenseGetAllDepartments() {
   return useSuspenseQuery({
     queryKey: ["suspenseDepartments"],
     queryFn: getAllDepartments,
+  });
+}
+
+export function useGetAllPrograms() {
+  return useQuery({
+    queryKey: ["programs"],
+    queryFn: getAllPrograms,
+  });
+}
+
+export function useSuspenseGetAllPrograms() {
+  return useSuspenseQuery({
+    queryKey: ["suspensePrograms"],
+    queryFn: getAllPrograms,
+  });
+}
+
+export function useGetAllInstructors() {
+  return useQuery({
+    queryKey: ["programs"],
+    queryFn: getAllInstructors,
+  });
+}
+
+export function useSuspenseGetAllInstructors() {
+  return useSuspenseQuery({
+    queryKey: ["suspensePrograms"],
+    queryFn: getAllInstructors,
   });
 }

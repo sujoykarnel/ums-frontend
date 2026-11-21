@@ -12,7 +12,7 @@ import { useSuspenseGetAllUniversities } from "@/hooks";
 export default function UniversityTable() {
   const { data } = useSuspenseGetAllUniversities();
 
-  const universities = data?.data ;
+  const universities = data?.data;
 
   console.log(universities);
 
@@ -21,28 +21,24 @@ export default function UniversityTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="">SL</TableHead>
-            <TableHead className="">Name</TableHead>
-            <TableHead className="">Short Name</TableHead>
-            <TableHead className="">Address</TableHead>
-            <TableHead className="">Email</TableHead>
-            <TableHead className="">Phone</TableHead>
-            <TableHead className="text-center">Action</TableHead>
+            <TableHead className="font-bold">SL</TableHead>
+            <TableHead className="font-bold">Name</TableHead>
+            <TableHead className="font-bold">Short Name</TableHead>
+            <TableHead className="font-bold">Address</TableHead>
+            <TableHead className="font-bold">Email</TableHead>
+            <TableHead className="font-bold">Phone</TableHead>
+            <TableHead className="font-bold text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {universities.map((university) => (
-            <TableRow key={university.id}>
-              <TableCell className="font-medium">1</TableCell>
-              <TableCell className="font-medium">{university.name}</TableCell>
-              <TableCell className="font-medium">
-                {university.shortName}
-              </TableCell>
-              <TableCell className="font-medium">
-                {university.address}
-              </TableCell>
-              <TableCell className="font-medium">{university.email}</TableCell>
-              <TableCell className="font-medium">{university.phone}</TableCell>
+          {universities.map((row, idx) => (
+            <TableRow key={row.id}>
+              <TableCell className="font-medium">{idx + 1}</TableCell>
+              <TableCell className="font-medium">{row.name}</TableCell>
+              <TableCell className="font-medium">{row.shortName}</TableCell>
+              <TableCell className="font-medium">{row.address}</TableCell>
+              <TableCell className="font-medium">{row.email}</TableCell>
+              <TableCell className="font-medium">{row.phone}</TableCell>
               <TableCell className="text-center">
                 <Button variant="outline">Update</Button>
               </TableCell>
