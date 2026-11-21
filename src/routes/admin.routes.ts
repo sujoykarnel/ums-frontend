@@ -33,8 +33,8 @@ export const adminRouters = [
         url: `${prefix}/semester`,
       },
       {
-        title: "Offering Course",
-        url: `${prefix}/offering-course`,
+        title: "Course Offering",
+        url: `${prefix}/course-offering`,
       },
     ],
   },

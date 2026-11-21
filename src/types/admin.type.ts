@@ -48,7 +48,7 @@ export interface IInstructor {
   address: string;
   resume: string;
   resumePublicId: string;
-  additionalFiles: AdditionalFile[];
+  additionalFiles: IAdditionalFile[];
   userId: string;
   departmentId: string;
   isDeleted: boolean;
@@ -56,4 +56,30 @@ export interface IInstructor {
   createdAt: string;
   updatedAt: string;
   department: IDepartment;
+}
+
+export interface ICourse {
+  id: string;
+  title: string;
+  code: string;
+  credit: number;
+  semesterNo: number;
+  programId: string;
+  program: IProgram;
+  isDeleted: boolean;
+  deletedAt: null | string;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface ISemester {
+  id: string;
+  name: string;
+  year: number;
+  startDate: string;
+  endDate: string;
+  status: string;
+  isDeleted: boolean;
+  deletedAt: null | string;
+  createdAt: string;
+  updatedAt: string;
 }

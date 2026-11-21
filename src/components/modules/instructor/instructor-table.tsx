@@ -9,7 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useSuspenseGetAllInstructors } from "@/hooks";
-import type { IAdditionalFile } from "@/types";
 
 export default function InstructorTable() {
   const { data } = useSuspenseGetAllInstructors();
@@ -51,7 +50,7 @@ export default function InstructorTable() {
                 </Link>
               </TableCell>
               <TableCell className="font-medium flex gap-2">
-                {row.additionalFiles.map((item: IAdditionalFile, idx) => (
+                {row.additionalFiles.map((item, idx) => (
                   <Link key={item.publicId} href={item.url} target="_blank">
                     <Button
                       variant="outline"

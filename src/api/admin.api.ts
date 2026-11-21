@@ -1,9 +1,11 @@
 import apiClient from "@/lib/apiClient";
 import type {
   ApiRsponse,
+  ICourse,
   IDepartment,
   IInstructor,
   IProgram,
+  ISemester,
   IUnivisity,
 } from "@/types";
 
@@ -21,4 +23,12 @@ export function getAllPrograms() {
 
 export function getAllInstructors() {
   return apiClient<ApiRsponse<IInstructor[]>>("/admin/instructor");
+}
+
+export function getAllCourses() {
+  return apiClient<ApiRsponse<ICourse[]>>("/admin/course");
+}
+
+export function getAllSemesters() {
+  return apiClient<ApiRsponse<ISemester[]>>("/admin/semester");
 }
