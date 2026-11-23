@@ -71,13 +71,15 @@ export interface ICourse {
   createdAt: string;
   updatedAt: string;
 }
+
+export type SemesterStatus = "UPCOMING" | "ACTIVE" | "COMPLETED" | "CLOSED";
 export interface ISemester {
   id: string;
   name: string;
   year: number;
   startDate: string;
   endDate: string;
-  status: string;
+  status: SemesterStatus;
   isDeleted: boolean;
   deletedAt: null | string;
   createdAt: string;

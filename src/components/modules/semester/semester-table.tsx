@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { formatDate } from "date-fns";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -36,10 +36,10 @@ export default function SemesterTable() {
               <TableCell className="font-medium">{row.name}</TableCell>
               <TableCell className="font-medium">{row.year}</TableCell>
               <TableCell className="font-medium">
-                {format(row.startDate, "dd-MMM-yyyy")}
+                {formatDate(row.startDate, "dd-MMM-yyyy")}
               </TableCell>
               <TableCell className="font-medium">
-                {format(row.endDate, "dd-MMM-yyyy")}
+                {formatDate(row.endDate, "dd-MMM-yyyy")}
               </TableCell>
               <TableCell className="font-medium">{row.status}</TableCell>
               <TableCell className="text-center">

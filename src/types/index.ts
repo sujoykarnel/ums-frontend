@@ -1,5 +1,6 @@
 export * from "./admin.type";
 export * from "./api.type";
 export * from "./auth.type";
+export * from "./courseOffering.type";
 export * from "./sidebar.type";
 export * from "./user.type";
