@@ -1,4 +1,4 @@
-import UniversityTabs from "@/components/modules/university/university-tabs";
+import UniversityTabs from "@/components/modules/admin/university/university-tabs";
 
 export default function UniversityPage() {
   return (

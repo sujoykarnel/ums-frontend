@@ -3,10 +3,10 @@
 import { Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TableLoading from "../../shared/table-loading";
-import UniversityTable from "./university-table";
+import TableLoading from "../../../shared/table-loading";
+import CourseTable from "./course-table";
 
-export default function UniversityTabs() {
+export default function CourseTabs() {
   return (
     <Tabs defaultValue="overview">
       <div className="flex justify-between my-5">
@@ -21,7 +21,7 @@ export default function UniversityTabs() {
 
       <TabsContent value="overview">
         <Suspense fallback={<TableLoading />}>
-          <UniversityTable />
+          <CourseTable />
         </Suspense>
       </TabsContent>
       <TabsContent value="add-new">Change your password here.</TabsContent>

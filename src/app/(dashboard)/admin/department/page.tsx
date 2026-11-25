@@ -1,4 +1,4 @@
-import DepartmentTabs from "@/components/modules/department/department-tabs";
+import DepartmentTabs from "@/components/modules/admin/department/department-tabs";
 
 export default function DepartmentPage() {
   return (

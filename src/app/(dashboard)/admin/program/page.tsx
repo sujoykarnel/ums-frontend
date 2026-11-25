@@ -1,4 +1,4 @@
-import ProgramTabs from "@/components/modules/program/program-tabs";
+import ProgramTabs from "@/components/modules/admin/course/program/program-tabs";
 
 export default function ProgramPage() {
   return (

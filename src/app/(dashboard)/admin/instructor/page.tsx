@@ -1,4 +1,4 @@
-import InstructorTabs from "@/components/modules/instructor/instructor-tabs";
+import InstructorTabs from "@/components/modules/admin/instructor/instructor-tabs";
 
 export default function ProgramPage() {
   return (

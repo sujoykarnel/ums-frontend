@@ -1,4 +1,4 @@
-import CourseTabs from "@/components/modules/course/course-tabs";
+import CourseTabs from "@/components/modules/admin/course/course-tabs";
 
 export default function CoursePage() {
   return (

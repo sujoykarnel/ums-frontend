@@ -1,4 +1,4 @@
-import SemesterTabs from "@/components/modules/semester/semester-tabs";
+import SemesterTabs from "@/components/modules/admin/semester/semester-tabs";
 
 export default function DepartmentPage() {
   return (
